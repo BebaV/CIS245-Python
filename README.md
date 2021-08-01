@@ -1,14 +1,13 @@
-# CIS245-Pythonimport requests
 import json
 country_code = 'IN'
 while True:
   
-input1 = input('Enter zip code or City name: ')
+input1 = input('Enter zip code or City and state: ')
   
-if input1.isdigit():
-key = f"zip={input1},{country_code}"
-else:
-key = f'q={input1},{country_code}'
+      if input1.isdigit():
+            key = f"zip={input1},{country_code}"
+      else:
+            key = f'q={input1},{country_code}'
   
 request_url = "https://community-open-weather-map.p.rapidapi.com/find"
 print(request_url)
@@ -17,7 +16,7 @@ print('requesting...')
 request = requests.get(request_url)
   
 if request.status_code == 200:
-print('sucessfull received data')
+print('sucessful received data')
 #request.text contains data in json format
 #using json.loads() that converts data to python dict.
 data = json.loads(requet.text)
