@@ -1,0 +1,37 @@
+Import requests
+import json
+country_code = 'USA'
+while True:
+  zip = input('Enter zip code or City and state: ')
+        if zip.isdigit():
+            key = f"zip={zip},{country_code}"
+      else:
+            key = f'q={zip},{country_code}'
+  
+request_url = "https://community-open-weather-map.p.rapidapi.com/find"
+print(request_url)
+  
+print('requesting information...')
+request = request.get(request_url)
+  
+if request.status_code == 200:
+  print('sucessful received data')
+#request.text contains data in json format
+#using json.loads() to converts data to python dict.
+data = json.loads(request.text)
+  
+print('OUTPUT::')
+  
+print('name',data['name'])
+print('temperature',data['main']['temp'],'in Fahrenheit')
+print('wind speed',data['wind']['speed'],'deg',data['wind']['deg'])
+print('pressure',data['main']['pressure'])
+print('humidity',data['main']['humidity'])
+print('cordinates',data['coord'])
+print('clouds',data['clouds'])
+print('weather',data['weather'][0]['main'])
+
+else:
+  print(‘ There was an error with that location, please try again.’)
+  print(request.status_code)
+  print(request.text)
