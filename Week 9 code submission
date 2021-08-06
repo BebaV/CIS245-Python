@@ -1,0 +1,30 @@
+import os
+
+def main():
+	directory = input("What directory do you want to save the file in : ")
+	filename = input("What do you want to call this file : ")
+	name = input("What is your name : ")
+	address = input("What is your address : ")
+	phone_number = input("What is your phone number : ")
+  
+#checking for existing directory
+	if os.path.isdir(directory):
+  
+#creating the file to write to
+		writeFile = open(os.path.join(directory,filename),'w')
+    
+#formatting data display with comma separation
+		writeFile.write(name+','+address+','+phone_number+'\n')
+    
+#close the file 
+		writeFile.close()
+	print("File contents:")
+  
+#file creation verification
+	readFile = open(os.path.join(directory,filename),'r')
+	for line in readFile:
+		print(line)
+		readFile.close()
+	else:
+		print("Sorry that directory is not exists...")
+main()
